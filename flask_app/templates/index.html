@@ -1,0 +1,28 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container">
+    <div class="row mt-3">
+        <div class="row-md">
+            <h2>Search for your favorite (or least favorite) professors here!</h2>
+        </div>
+        <div class="row-md">
+            <form action="/" class="form-inline my-2 my-lg-0" method="POST">
+
+                {{ form.csrf_token }}
+                {{ form.search_query(class="form-control", placeholder="Search") }}
+
+                {% if form.search_query.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in form.search_query.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.submit(class="btn btn-outline-success") }}
+        </div>
+    </div>
+    <div class="row">
+        <img class="pic" src="data:image/png;base64,{{img}}">
+    </div>
+</div>
+{% endblock %}
